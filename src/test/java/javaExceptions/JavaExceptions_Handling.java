@@ -1,5 +1,8 @@
 package javaExceptions;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 import org.testng.annotations.Test;
 
 public class JavaExceptions_Handling {
@@ -75,7 +78,7 @@ public class JavaExceptions_Handling {
 	
 	// A scenario where ArithmeticException occurs
 	// If we divide any number by zero, there occurs an ArithmeticException.
-	@Test
+	@Test(priority=0)
 	public void AirthmeticExceptionTest() {
 	
 		//int a = 100/0;
@@ -85,13 +88,13 @@ public class JavaExceptions_Handling {
 		}catch(ArithmeticException e){
 			System.out.println(e);
 		}
-		System.out.println("rest of the code..."); 
+		System.out.println("rest of the code... after AirthmeticExceptionTest"); 
 	}
 	
 	
 	// A scenario where NullPointerException occurs
 	// If we have a null value in any variable & performing any operation on the variable, throws a NullPointerException.
-	@Test
+	@Test(priority=1)
 	public void NullPointerExceptionTest() {
 	
 		String s=null;  
@@ -102,13 +105,13 @@ public class JavaExceptions_Handling {
 		}catch(NullPointerException e){
 			System.out.println(e);
 		}
-		System.out.println("rest of the code..."); 
+		System.out.println("rest of the code... after NullPointerExceptionTest"); 
 	}
 	
 	
 	// A scenario where NumberFormatException occurs
 	// If the formatting of any variable or number is mismatched, it may result into NumberFormatException. 
-	@Test
+	@Test(priority=2)
 	public void NumberFormatExceptionTest() {
 	
 		String s="abc";  
@@ -119,12 +122,12 @@ public class JavaExceptions_Handling {
 		}catch(NumberFormatException e){
 			System.out.println(e);
 		}
-		System.out.println("rest of the code..."); 
+		System.out.println("rest of the code... after NumberFormatExceptionTest"); 
 	}
 	
 	// A scenario where ArrayIndexOutOfBoundsException occurs
 	// When an array exceeds to it's size, the ArrayIndexOutOfBoundsException occurs.
-	@Test
+	@Test(priority=3)
 	public void ArrayIndexOutOfBoundsExceptionTest() {
 	
 		int a[]=new int[5];  
@@ -135,7 +138,50 @@ public class JavaExceptions_Handling {
 		}catch(ArrayIndexOutOfBoundsException e){
 			System.out.println(e);
 		}
-		System.out.println("rest of the code..."); 
+		System.out.println("rest of the code...  after ArrayIndexOutOfBoundsExceptionTest"); 
+	}
+	
+	// Handle the exception using the parent class exception instead of generated specific type of exception.
+	@Test(priority=4)
+	public void HandleExceptionWithParentClass_Test() {
+		
+		try {
+			//code that may raise exception  
+			int n=50/0; //may throw exception   
+		}catch(Exception e){
+			System.out.println("Can't divided by zero" + e);
+		}
+		System.out.println("rest of the code... after HandleExceptionWithParentClass_Test"); 
 	}
 
+
+	// Handle the generated exception (Arithmetic Exception) with a different type of exception class (ArrayIndexOutOfBoundsException).
+	@Test(priority=6)
+	public void HandleExceptionWithDifferentClass_Test() {
+		
+		try {
+			//code that may raise exception  
+			int n=50/0; //may throw exception   
+		}catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("Can't divided by zero" + e);
+		}
+		System.out.println("rest of the code...  after HandleExceptionWithDifferentClass_Test"); 
+	}
+	
+	// Handle checked exception
+	@Test(priority=5)
+	public void HandleCheckedException_Test() {
+		
+		//PrintWriter pw = new PrintWriter("jtp.txt"); //may throw exception   
+		//pw.println("saved"); 
+		
+		try {
+			//code that may raise exception  
+			PrintWriter pw = new PrintWriter("jtp.txt");  
+		}catch(FileNotFoundException e){
+			System.out.println(e);
+		}
+		
+		System.out.println("rest of the code... after HandleCheckedException_Test"); 
+	}
 }
