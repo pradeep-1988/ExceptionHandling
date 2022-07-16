@@ -43,7 +43,7 @@ public class JavaExceptions_Handling {
 	Types of Java Exceptions:
 		1. Checked Exception
 			- The classes that directly inherit the Throwable class except RuntimeException are known as checked exceptions.
-			- For example: IOException, SQLException, ClassNotFoundException etc.
+			- For example: IOException, SQLException, ClassNotFoundException, FileNotFoundException etc.
 			- Checked exceptions are checked at compile-time.
 		2. Unchecked Exception
 			- The classes that inherit the RuntimeException are known as unchecked exceptions. 
